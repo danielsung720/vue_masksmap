@@ -55,6 +55,9 @@
     <div class="col-sm-9">
       <div id="map"></div>
     </div>
+    <div class="footer">
+      <h3>尼爾丹的口罩地圖</h3>
+    </div>
   </div>
 </template>
 
@@ -86,7 +89,7 @@ const osm = {
     L.marker([y, x], {
       icon,
     }).addTo(osmMap).bindPopup(`<strong>${item.name}</strong> <br>
-    口罩剩餘：<strong>成人 - ${item.mask_adult ? `${item.mask_adult} 個` : '未取得資料'}/ 兒童 - ${item.mask_child ? `${item.mask_child} 個` : '未取得資料'}</strong><br>
+    口罩剩餘：<strong>成人 - ${item.mask_adult ? `${item.mask_adult} 個` : '0個'}/ 兒童 - ${item.mask_child ? `${item.mask_child} 個` : '0個'}</strong><br>
     地址: <a href="https://www.google.com.tw/maps/place/${item.address}" target="_blank">${item.address}</a><br>
     電話: ${item.phone}<br>
     <small>最後更新時間: ${item.updated}</small>`);
@@ -180,6 +183,17 @@ export default {
 #map { height: 100vh; }
 .home { position: relative; }
 .highlight { background: #e9ffe3; }
-.toolbox{ height: 100vh; overflow-y: auto; a{ cursor: pointer; } }
+.toolbox{ height: 100vh; overflow-y: auto; background: #e9ffe3; a{ cursor: pointer; } }
+
+@media only screen and (min-width: 501px) {
+  .footer{ display: none; }
+}
+
+@media only screen and (max-width: 500px) {
+  .toolbox{ height: 280px; .list-group-item{ height: 100px; h3{ font-size: 20px; } } }
+  #map{ height: 50vh; margin-top: 15px; }
+  .footer{ width: 100%; text-align: center; margin-top: 15px;
+    background: #227700; color: #fff; height: 45px; h3{ line-height: 45px; } }
+}
 
 </style>
